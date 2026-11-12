@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
@@ -28,11 +28,6 @@ a {
     text-decoration: none;
 }
 
-ul {
-list-style: none;
-margin: 0;
-}
-
 a:hover {
     color: var(--hover-link-color);
 }
@@ -46,8 +41,12 @@ summary {
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 1rem 0;    
+    padding: 1rem 0;
     border-bottom: 2px solid var(--gold-divider-color);
+}
+
+.card:last-child {
+    border-bottom: 0;
 }
 
 .card-info {
@@ -80,4 +79,18 @@ summary {
 
 .card h3 {
     margin: 0;
+}
+
+.card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0;
+}
+
+.card li {
+    display: inline-block;
+}
+
+.card-side {
+    text-align: end;
 }
