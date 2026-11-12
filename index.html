@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>ROYAL CROSSBREED UNIVERSITY</title>
 </head>
 
@@ -21,70 +26,78 @@
     <main>
         <h1>Дедлайны</h1>
         <details open>
-            <summary>студенты</summary>
-            <article>
-                <img src="img/алессия.png" alt="Алессия">
-                <h3>
-                    <a href="https://vk.ru/topic-196210590_68706438" target="_blank" rel="noopener noreferrer">Алессия
-                        Коттанео</a>
-                </h3>
-                <p>
-                    отвечает: <a href="https://vk.ru/id443417698">Полина Лисовская</a>
-                </p>
-                <time datetime="2026-12-10">10 декабря</time>
+            <summary class="cursor-on-summary">студенты</summary>
+            <article class="card">
+                <img src="img/алессия.png" class="avatar" alt="Алессия">
+                <div class="card-info">
+                    <h3>
+                        <a href="https://vk.ru/topic-196210590_68706438" target="_blank"
+                            rel="noopener noreferrer">Алессия
+                            Коттанео с очень длиннющим именем</a>
+                    </h3>
+                    <p>отвечает: <a href="https://vk.ru/id443417698">Полина Лисовская</a>
+                    </p>
+                </div>
+                <time datetime="2026-12-10" class="card-date">10 декабря</time>
             </article>
-            <article>
-                <img src="img/нила.png" alt="Нила">
-                <h3>
-                    <a href="https://vk.ru/topic-196210590_68217163" target="_blank" rel="noopener noreferrer">Нила
-                        Вебер</a>
-                </h3>
-                <p>
-                    отвечает: <a href="https://vk.ru/id309098878">Мята Мятноватая</a>
-                </p>
-                <p>-</p>
+            <hr class="divider">
+            <article class="card">
+                <img src="img/нила.png" class="avatar" alt="Нила">
+                <div class="card-info">
+                    <h3>
+                        <a href="https://vk.ru/topic-196210590_68217163" target="_blank" rel="noopener noreferrer">Нила
+                            Вебер</a>
+                    </h3>
+                    <p>отвечает: <a href="https://vk.ru/id309098878">Мята Мятноватая</a> </p>
+                </div>
+                <p class="card-date">-</p>
                 <ul>
-                    <li>админ</li>
+                    <li class="card-marks">админ</li>
                 </ul>
             </article>
-            <article>
-                <img src="img/сильвиус.png" alt="Сильвиус">
-                <h3>
-                    <a href="https://vk.ru/topic-196210590_68443459" target="_blank" rel="noopener noreferrer">Сильвиус
-                        Невилл</a>
-                </h3>
-                <p>
-                    отвечает: <a href="https://vk.ru/id677928042">Сашуликс Лавров</a>
-                </p>
-                <time datetime="2026-12-12">12 декабря</time>
+            <hr class="divider">
+            <article class="card">
+                <img src="img/сильвиус.png" class="avatar" alt="Сильвиус">
+                <div class="card-info">
+                    <h3>
+                        <a href="https://vk.ru/topic-196210590_68443459" target="_blank"
+                            rel="noopener noreferrer">Сильвиус
+                            Невилл</a>
+                    </h3>
+                    <p>отвечает: <a href="https://vk.ru/id677928042">Сашуликс Лавров</a> </p>
+                </div>
+                <time datetime="2026-12-12" class="card-date">12 декабря</time>
             </article>
         </details>
         <details>
-            <summary>преподаватели</summary>
-            <article>
-                <img src="img/шелдон.png" alt="Шелдон">
-                <h3>
-                    <a href="https://vk.ru/topic-196210590_68706438" target="_blank" rel="noopener noreferrer">Шелдон
-                        Кроуфорд</a>
-                </h3>
-                <p>
-                    отвечает: <a href="https://vk.ru/id443417698">Полина Лисовская</a>
-                </p>
-                <time datetime="2027-02-01">1 февраля</time>
+            <summary class="cursor-on-summary">преподаватели</summary>
+            <article class="card">
+                <img src="img/шелдон.png" class="avatar" alt="Шелдон">
+                <div class="card-info">
+                    <h3>
+                        <a href="https://vk.ru/topic-196210590_68706438" target="_blank"
+                            rel="noopener noreferrer">Шелдон
+                            Кроуфорд</a>
+                    </h3>
+                    <p>отвечает: <a href="https://vk.ru/id443417698">Полина Лисовская</a> </p>
+                </div>
+                <time datetime="2027-02-01" class="card-date">1 февраля</time>
                 <ul>
-                    <li>отпуск</li>
+                    <li class="card-marks">отпуск</li>
                 </ul>
             </article>
-            <article>
-                <img src="img/эбигейл.jpg" alt="Эбигейл">
-                <h3>
-                    <a href="https://vk.ru/topic-196210590_68920369" target="_blank" rel="noopener noreferrer">Эбигейл
-                        Джонс</a>
-                </h3>
-                <p>
-                    отвечает: <a href="https://vk.ru/id526817956">Антон Бесстыдников</a>
-                </p>
-                <time datetime="2026-12-01">1 декабря</time>
+            <hr class="divider">
+            <article class="card">
+                <img src="img/эбигейл.jpg" class="avatar" alt="Эбигейл">
+                <div class="card-info">
+                    <h3>
+                        <a href="https://vk.ru/topic-196210590_68920369" target="_blank"
+                            rel="noopener noreferrer">Эбигейл
+                            Джонс</a>
+                    </h3>
+                    <p>отвечает: <a href="https://vk.ru/id526817956">Антон Бесстыдников</a></p>
+                </div>
+                <time datetime="2026-12-01" class="card-date">1 декабря</time>
             </article>
         </details>
     </main>

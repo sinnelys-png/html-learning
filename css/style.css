@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+    --main-background-color: #002F4A;
+    --main-text-color: #cccccc;
+    --secondary-text-color: #cccccc96;
+    --gold-color: #E3CFAC;
+    --hover-link-color: white;
+    --gold-divider-color: rgba(227, 207, 172, 0.15);
+}
+
+body {
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
+    font-family: 'Jost', sans-serif;
+}
+
+main {
+    max-width: 50rem;
+    padding: 20px;
+    margin: auto;
+}
+
+a {
+    color: var(--gold-color);
+    text-decoration: none;
+}
+
+li::marker {
+content: "";
+}
+
+a:hover {
+    color: var(--hover-link-color);
+}
+
+p {
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+.cursor-on-summary {
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.card {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.card-info {
+    flex-grow: 1;
+}
+
+.card-date {
+    text-align: end;
+}
+
+.card-marks {
+    border: 2px solid var(--gold-divider-color);
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 0.7em;
+    color: var(--secondary-text-color)
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.divider {
+    height: 2px;
+    background-color: var(--gold-divider-color);
+    border: none;
+}
