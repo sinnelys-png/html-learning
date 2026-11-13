@@ -22,31 +22,40 @@
     --site-width: 50rem;
 
     /* высота шапки */
-    --header-height: 133px;
+    --header-height: 8.3rem;
 
     /* padding (внутренние отступы) */
-    --main-padding: 1rem;
-    --tag-padding-hor: 0.4rem;
-    --tag-padding-ver: 0.06rem;
+    --card-padding: 1rem;
+    --header-padding: 1rem;
+    --tag-padding-hor: 0.4em;
+    --tag-padding-ver: 0.06em;
+    --main-padding: 5rem;
 
     /* margin (внешние) */
     --marks-margin: 0.2rem;
+    --summary-margin: 0.3em;
 
     /* gap */
     --nav-gap: 2rem;
-    --marks-gap: 0.5rem;
+    --marks-gap: 0.5em;
 
     /* скруглённость */
     --main-border-radius: 0.1rem;
 
     /* размеры текстов */
-    --small-text: 0.8em;
-    --main-text: 1.1em;
-    --site-title-text: 2em;
-    --h1-text: 1.5em;
+    --small-text: 0.8rem;
+    --main-text: 1rem;
+    --site-title-text: 2rem;
+    --h1-text: 1.5rem;
+    --summary-text: 1.35rem;
 
     /* аватарки */
     --ava-size-medium: 4rem;
+}
+
+@font-face {
+    font-family: 'Greengoth';
+    src: url("../fonts/Greengoth SHA_0.woff2") format("woff2");
 }
 
 header {
@@ -58,7 +67,7 @@ header {
     text-align: center;
     border-bottom: var(--line-width) solid var(--gold-divider-color);
     background-color: var(--main-background-color);
-    padding: calc(var(--main-padding) * 2);
+    padding: calc(var(--header-padding) * 2);
     z-index: var(--z-position-header);
     height: var(--header-height);
 }
@@ -71,6 +80,7 @@ nav {
 
 nav a {
     color: var(--main-text-color);
+    font-family: 'Greengoth';
 }
 
 .header-width {
@@ -82,14 +92,16 @@ nav a {
     font-size: var(--site-title-text);
     padding: 0;
     margin: 0;
+    font-family: 'Greengoth';
 }
 
 body {
-    /* background-color: black; */
-    background-color: var(--main-background-color);
+    background-color: black;
+    /* background-color: var(--main-background-color); */
     color: var(--main-text-color);
     font-family: 'Jost', sans-serif;
     font-size: var(--main-text);
+    margin: 0;
 }
 
 main {
@@ -101,10 +113,11 @@ main {
 
 h1 {
     font-size: var(--h1-text);
+    font-family: 'Greengoth';
 }
 
 a {
-    color: var(--gold-color);
+    color: var(--main-text);
     text-decoration: none;
 }
 
@@ -113,12 +126,43 @@ a:hover {
 }
 
 summary {
+    display: flex;
+    align-items: center;
+    list-style: none;
     cursor: pointer;
-    font-size: 1.2em;
     position: sticky;
+    padding: 0.5rem 0 0.5rem;
     top: var(--header-height);
     background-color: var(--main-background-color);
     z-index: var(--z-position-summary);
+    font-family: 'Greengoth';
+    font-size: var(--summary-text);
+    color: var(--gold-color);
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::before {
+    content: "✦";
+    margin-right: var(--summary-margin);
+    transform: scale(80%);
+    color: color-mix(in srgb, var(--gold-color) 60%, transparent);
+}
+
+summary::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    margin-left: auto;
+    transform: rotate(45deg);
+    border-bottom: 2px solid var(--gold-color);
+    border-right: 2px solid var(--gold-color);
+}
+
+details[open] > summary::after {
+    transform: rotate(225deg);
 }
 
 .card {
@@ -126,7 +170,7 @@ summary {
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: var(--main-padding) 0;
+    padding: var(--card-padding) 0;
     /* padding: 4rem 0; */
     border-bottom: var(--line-width) solid var(--gold-divider-color);
 }
@@ -138,12 +182,6 @@ summary {
 .card-info {
     flex-grow: 1;
     min-width: 0;
-}
-
-.card-info p a {
-    white-space: pre-wrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 .card-marks {
@@ -185,10 +223,17 @@ summary {
 
 .card p {
     margin: 0;
+    font-size: 0.9em;
+    color: color-mix(in srgb, var(--main-text-color) 80%, transparent);
 }
 
 .card h3 {
     margin: 0;
+}
+
+.card h3 a {    
+    font-weight: 600;
+    font-size: 1.05rem;
 }
 
 .card ul {
@@ -204,11 +249,20 @@ summary {
 .card-side {
     text-align: end;
     min-width: 5rem;
-    margin-right: 0;
+}
+
+.answers {
+    font-size: 0.85em;
+    color: color-mix(in srgb, var(--main-text-color) 55%, transparent);
 }
 
 .no-deadline {
     font-style: italic;
+}
+
+.deadline-date {
+    font-size: 0.95rem;
+    color: var(--main-text-color)
 }
 
 
@@ -216,7 +270,8 @@ summary {
     :root {
         --ava-size-medium: 3rem;
         --site-title-text: 1.6rem;
-        --header-height: 90px;
+        --header-height: 5.6;
+        --main-padding: 0.5rem;
     }
 
     main {
@@ -227,8 +282,7 @@ summary {
 
 @media (max-width: 460px) {
     :root {
-        --ava-size-medium: 3rem;
-        --site-title-text: 1.05em;
+        --site-title-text: 1.05rem;
         --nav-gap: 1rem;
     }
 
