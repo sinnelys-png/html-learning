@@ -46,7 +46,7 @@
     --small-text: 0.8rem;
     --main-text: 1rem;
     --site-title-text: 2rem;
-    --h1-text: 1.5rem;
+    --h2-text: 1.5rem;
     --summary-text: 1.35rem;
 
     /* аватарки */
@@ -56,6 +56,10 @@
 @font-face {
     font-family: 'Greengoth';
     src: url("../fonts/Greengoth SHA_0.woff2") format("woff2");
+}
+
+section {
+    scroll-margin-top: calc(var(--header-height) + var(--header-padding));
 }
 
 header {
@@ -111,8 +115,8 @@ main {
     margin: auto;
 }
 
-h1 {
-    font-size: var(--h1-text);
+h2 {
+    font-size: var(--h2-text);
     font-family: 'Greengoth';
 }
 
@@ -161,7 +165,7 @@ summary::after {
     border-right: 2px solid var(--gold-color);
 }
 
-details[open] > summary::after {
+details[open]>summary::after {
     transform: rotate(225deg);
 }
 
@@ -231,7 +235,7 @@ details[open] > summary::after {
     margin: 0;
 }
 
-.card h3 a {    
+.card h3 a {
     font-weight: 600;
     font-size: 1.05rem;
 }
@@ -265,12 +269,34 @@ details[open] > summary::after {
     color: var(--main-text-color)
 }
 
+/* активность */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 1rem;
+    text-align: center;
+
+}
+
+.card-activity {
+    position: relative;
+}
+
+.card-activity-place {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.card-first-activity {
+    grid-column: span 2;
+}
 
 @media (max-width: 768px) {
     :root {
         --ava-size-medium: 3rem;
         --site-title-text: 1.6rem;
-        --header-height: 5.6;
+        --header-height: 5.6rem;
         --main-padding: 0.5rem;
     }
 
@@ -284,6 +310,10 @@ details[open] > summary::after {
     :root {
         --site-title-text: 1.05rem;
         --nav-gap: 1rem;
+    }
+
+    .card-first-activity {
+        grid-column: span 1;
     }
 
 }
