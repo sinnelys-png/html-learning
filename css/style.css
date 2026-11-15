@@ -123,6 +123,7 @@ h2 {
 a {
     color: var(--main-text);
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 a:hover {
@@ -161,6 +162,7 @@ summary::after {
     height: 10px;
     margin-left: auto;
     transform: rotate(45deg);
+    transition: transform 0.3s;
     border-bottom: 2px solid var(--gold-color);
     border-right: 2px solid var(--gold-color);
 }
@@ -169,14 +171,24 @@ details[open]>summary::after {
     transform: rotate(225deg);
 }
 
+
+.deadline-chargroup-opening {
+    animation: appear 1s;
+}
+
 .card {
     position: relative;
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: var(--card-padding) 0;
-    /* padding: 4rem 0; */
+    padding: var(--card-padding) var(--main-padding);
     border-bottom: var(--line-width) solid var(--gold-divider-color);
+    margin: 0 calc(var(--main-padding)*-1);    
+    transition: background-color 0.5s;
+}
+
+.card:hover {
+    background-color: color-mix(in srgb, var(--main-text-color) 8%, transparent);
 }
 
 .card:last-child {
@@ -275,11 +287,32 @@ details[open]>summary::after {
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     gap: 1rem;
     text-align: center;
+}
 
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateX(0.4rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .card-activity {
     position: relative;
+    animation: appear 1.5s calc(0.1s*var(--i));
+    animation-fill-mode: both;
+}
+
+.card-activity>.avatar {
+    transition: transform 0.3s;
+}
+
+.card-activity:hover>.avatar {
+    transform: scale(1.08);
 }
 
 .card-activity-place {
@@ -292,16 +325,20 @@ details[open]>summary::after {
     grid-column: span 2;
 }
 
+details:not([open])::details-content {
+    display: none;
+}
+
 @media (max-width: 768px) {
     :root {
         --ava-size-medium: 3rem;
         --site-title-text: 1.6rem;
         --header-height: 5.6rem;
-        --main-padding: 0.5rem;
+        --main-padding: 1rem;
     }
 
     main {
-        padding: calc(var(--main-padding)/2);
+        padding: calc(var(--main-padding));
     }
 
 }
@@ -310,10 +347,29 @@ details[open]>summary::after {
     :root {
         --site-title-text: 1.05rem;
         --nav-gap: 1rem;
+        --main-padding: 0.5rem;
     }
 
     .card-first-activity {
         grid-column: span 1;
     }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+    a {
+        transition: none;
+    }
+    summary::after {
+        transition: none;
+    } 
+    .card-activity>.avatar {
+        transition: none;
+    }
+    .deadline-chargroup-opening {
+        animation: none;
+    }
+    .card-activity {
+        animation: none;
+    }
 }
