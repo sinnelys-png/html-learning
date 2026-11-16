@@ -16,7 +16,7 @@
     --z-position-header: 50;
 
     /* размеры линий */
-    --line-width: 2px;
+    --line-width: 1px;
 
     /* ширина страницы */
     --site-width: 50rem;
@@ -51,6 +51,10 @@
 
     /* аватарки */
     --ava-size-medium: 4rem;
+
+    /* градиенты */
+    --gradient-divider: linear-gradient(to right, transparent 5%, var(--gold-color) calc(50% - 0.8rem), transparent calc(50% - 0.8rem) calc(50% + 0.8rem), var(--gold-color) calc(50% + 0.8rem), transparent 95%);
+    --gradient-divider-solid: linear-gradient(to right, transparent 5%, var(--gold-color) 50%, transparent 95%)
 }
 
 @font-face {
@@ -58,9 +62,13 @@
     src: url("../fonts/Greengoth SHA_0.woff2") format("woff2");
 }
 
+/* ===== СТРАНИЦЫ САЙТА ===== */
+
 section {
     scroll-margin-top: calc(var(--header-height) + var(--header-padding));
 }
+
+/* ===== ШАПКА ===== */
 
 header {
     display: flex;
@@ -69,11 +77,21 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-bottom: var(--line-width) solid var(--gold-divider-color);
     background-color: var(--main-background-color);
     padding: calc(var(--header-padding) * 2);
     z-index: var(--z-position-header);
     height: var(--header-height);
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: var(--line-width);
+    left: 0;
+    right: 0;
+    opacity: 0.15;
+    background: var(--gradient-divider-solid);
 }
 
 nav {
@@ -99,20 +117,26 @@ nav a {
     font-family: 'Greengoth';
 }
 
+/* ===== ФОН ===== */
+
 body {
+    background: radial-gradient(circle 1300px at top, var(--main-background-color), black);
+    background-repeat: no-repeat;
     background-color: black;
-    /* background-color: var(--main-background-color); */
     color: var(--main-text-color);
     font-family: 'Jost', sans-serif;
     font-size: var(--main-text);
     margin: 0;
 }
 
+/* ===== ОСНОВНОЙ БЛОК ===== */
+
 main {
     background-color: var(--main-background-color);
     max-width: var(--site-width);
     padding: var(--main-padding);
     margin: auto;
+    overflow-x: clip;
 }
 
 h2 {
@@ -121,14 +145,17 @@ h2 {
 }
 
 a {
-    color: var(--main-text);
+    color: var(--main-text-color);
     text-decoration: none;
     transition: color 0.3s;
 }
 
+/* наведение */
 a:hover {
     color: var(--hover-link-color);
 }
+
+/* ===== ВКЛАДКИ ===== */
 
 summary {
     display: flex;
@@ -168,13 +195,14 @@ summary::after {
 }
 
 details[open]>summary::after {
-    transform: rotate(225deg);
+    transform: rotate(225deg);;
 }
 
-
-.deadline-chargroup-opening {
-    animation: appear 1s;
+details:not([open])::details-content {
+    display: none;
 }
+
+/* ===== КАРТОЧКИ ДЕДЛАЙНОВ ===== */
 
 .card {
     position: relative;
@@ -182,17 +210,10 @@ details[open]>summary::after {
     gap: 1rem;
     align-items: center;
     padding: var(--card-padding) var(--main-padding);
-    border-bottom: var(--line-width) solid var(--gold-divider-color);
-    margin: 0 calc(var(--main-padding)*-1);    
+    margin: 0 calc(var(--main-padding)*-1);
     transition: background-color 0.5s;
-}
-
-.card:hover {
-    background-color: color-mix(in srgb, var(--main-text-color) 8%, transparent);
-}
-
-.card:last-child {
-    border-bottom: 0;
+    animation: appear 1s calc(0.1s*var(--i));
+    animation-fill-mode: both;
 }
 
 .card-info {
@@ -200,6 +221,12 @@ details[open]>summary::after {
     min-width: 0;
 }
 
+.card-side {
+    text-align: end;
+    min-width: 5rem;
+}
+
+/* метки */
 .card-marks {
     border: var(--line-width) solid var(--gold-divider-color);
     border-radius: var(--main-border-radius);
@@ -229,6 +256,7 @@ details[open]>summary::after {
     background-color: rgb(102 134 184 / 0.2);
 }
 
+/* аватары */
 .avatar {
     border-radius: 50%;
     height: var(--ava-size-medium);
@@ -237,6 +265,13 @@ details[open]>summary::after {
     flex-shrink: 0;
 }
 
+.avatar-empty {
+    background: radial-gradient(circle var(--ava-size-medium) at top, var(--main-background-color), color-mix(in srgb, black 30%, var(--main-background-color)));
+    border: 2px solid color-mix(in srgb, var(--gold-color) 40%, transparent);
+    transition: border 0.3s;
+}
+
+/* стили текста и заголовков в карточках дедлайерв */
 .card p {
     margin: 0;
     font-size: 0.9em;
@@ -262,11 +297,6 @@ details[open]>summary::after {
     justify-content: end;
 }
 
-.card-side {
-    text-align: end;
-    min-width: 5rem;
-}
-
 .answers {
     font-size: 0.85em;
     color: color-mix(in srgb, var(--main-text-color) 55%, transparent);
@@ -278,27 +308,74 @@ details[open]>summary::after {
 
 .deadline-date {
     font-size: 0.95rem;
-    color: var(--main-text-color)
+    color: var(--main-text-color);
 }
 
-/* активность */
+/* разделители между карточками дедлайнов */
+.card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: var(--line-width);
+    left: 0;
+    right: 0;
+    opacity: 0.15;
+    background: var(--gradient-divider);
+    transition: opacity 0.3s;
+}
+
+.card::before {
+    content: "✦";
+    opacity: 0.2;
+    position: absolute;
+    bottom: 0;
+    font-size: 1em;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    transition: opacity 0.3s;
+}
+
+.card:last-child::after,
+.card:last-child::before {
+    content: none;
+}
+
+/* анимации при наведении на карточку дедлайнов */
+.card:hover {
+    background-color: color-mix(in srgb, var(--main-text-color) 8%, transparent);
+}
+
+.card .deadline-date,
+.card .deadline-char-name {
+    transition: color 0.3s;
+}
+
+.card:hover .deadline-date,
+.card:hover .deadline-char-name {
+    color: var(--hover-link-color);
+}
+
+.card:hover::before,
+.card:has(+.card:hover)::before {
+    opacity: 1;
+}
+
+.card:hover::after,
+.card:has(+.card:hover)::after {
+    opacity: 0.3;
+}
+
+.card:hover .avatar-empty {
+    border: 2px solid var(--gold-color);
+}
+
+
+/* ===== АКТИВНОСТЬ ===== */
 .activity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     gap: 1rem;
     text-align: center;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateX(0.4rem);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .card-activity {
@@ -311,10 +388,6 @@ details[open]>summary::after {
     transition: transform 0.3s;
 }
 
-.card-activity:hover>.avatar {
-    transform: scale(1.08);
-}
-
 .card-activity-place {
     position: absolute;
     top: 0.5rem;
@@ -325,9 +398,27 @@ details[open]>summary::after {
     grid-column: span 2;
 }
 
-details:not([open])::details-content {
-    display: none;
+/* анимации активности */
+.card-activity:hover>.avatar {
+    transform: scale(1.08);
 }
+
+
+/* ===== АНИМАЦИИ ===== */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateX(5.8rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ===== АДАПТАЦИЯ ПОД МОБИЛКИ ===== */
 
 @media (max-width: 768px) {
     :root {
@@ -335,10 +426,6 @@ details:not([open])::details-content {
         --site-title-text: 1.6rem;
         --header-height: 5.6rem;
         --main-padding: 1rem;
-    }
-
-    main {
-        padding: calc(var(--main-padding));
     }
 
 }
@@ -356,20 +443,44 @@ details:not([open])::details-content {
 
 }
 
+/* ===== БЕЗ АНИМАЦИЙ ===== */
+
 @media (prefers-reduced-motion: reduce) {
     a {
         transition: none;
     }
+
     summary::after {
         transition: none;
-    } 
+    }
+
     .card-activity>.avatar {
         transition: none;
     }
-    .deadline-chargroup-opening {
+
+    .card .deadline-date,
+    .card .deadline-char-name {
+        transition: none;
+    }
+
+    .card-activity {
         animation: none;
     }
-    .card-activity {
+
+    .card::before {
+        transition: none;
+    }
+
+    .card::after {
+        transition: none;
+    }
+
+    .avatar-empty {
+        transition: none;
+    }
+
+    .card {
+        transition: none;
         animation: none;
     }
 }
