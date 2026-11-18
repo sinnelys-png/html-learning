@@ -39,6 +39,9 @@
     --nav-gap: 2rem;
     --marks-gap: 0.5em;
 
+    /* ширина тегов в дедлайнах */
+    --marks-width: 6rem;
+
     /* скруглённость */
     --main-border-radius: 0.1rem;
 
@@ -129,6 +132,8 @@ body {
     margin: 0;
 }
 
+
+
 /* ===== ОСНОВНОЙ БЛОК ===== */
 
 main {
@@ -195,7 +200,8 @@ summary::after {
 }
 
 details[open]>summary::after {
-    transform: rotate(225deg);;
+    transform: rotate(225deg);
+    ;
 }
 
 details:not([open])::details-content {
@@ -227,16 +233,22 @@ details:not([open])::details-content {
 }
 
 /* метки */
+.card-marks-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .card-marks {
-    border: var(--line-width) solid var(--gold-divider-color);
-    border-radius: var(--main-border-radius);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, calc(var(--tag-padding-hor) + 0.5rem) 50%);
     padding: var(--tag-padding-ver) var(--tag-padding-hor);
+    width: var(--marks-width);
     font-size: var(--small-text);
     color: var(--secondary-text-color);
 }
 
 .mark-admin {
     color: var(--gold-color);
+    background-color: color-mix(in srgb, var(--main-text-color) 8%, transparent);
 }
 
 .mark-vacation {
@@ -387,6 +399,9 @@ details:not([open])::details-content {
 .card-activity>.avatar {
     transition: transform 0.3s;
 }
+.card-activity:hover>.avatar {
+    transform: scale(1.08);
+}
 
 .card-activity-place {
     position: absolute;
@@ -396,11 +411,20 @@ details:not([open])::details-content {
 
 .card-first-activity {
     grid-column: span 2;
+    background-color: color-mix(in srgb, var(--main-text-color) 8%, transparent);
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
+    transition: clip-path 0.3s;
+    padding: 1rem;
+}
+.card-first-activity:hover {
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
 }
 
-/* анимации активности */
-.card-activity:hover>.avatar {
-    transform: scale(1.08);
+.activity-name {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent);
+    mask-image: linear-gradient(to right, black 90%, transparent);
 }
 
 
@@ -435,6 +459,7 @@ details:not([open])::details-content {
         --site-title-text: 1.05rem;
         --nav-gap: 1rem;
         --main-padding: 0.5rem;
+        --marks-width: 5.6rem;
     }
 
     .card-first-activity {
@@ -483,4 +508,9 @@ details:not([open])::details-content {
         transition: none;
         animation: none;
     }
+
+    .card-first-activity {
+    transition: none;
+}
+
 }
