@@ -40,7 +40,7 @@
     --marks-gap: 0.5em;
 
     /* ширина тегов в дедлайнах */
-    --marks-width: 6rem;
+    --marks-width: 5.5rem;
 
     /* скруглённость */
     --main-border-radius: 0.1rem;
@@ -54,6 +54,9 @@
 
     /* аватарки */
     --ava-size-medium: 4rem;
+
+    /* вырез ленточки */
+    --notch: 0.8rem;
 
     /* градиенты */
     --gradient-divider: linear-gradient(to right, transparent 5%, var(--gold-color) calc(50% - 0.8rem), transparent calc(50% - 0.8rem) calc(50% + 0.8rem), var(--gold-color) calc(50% + 0.8rem), transparent 95%);
@@ -230,6 +233,7 @@ details:not([open])::details-content {
 .card-side {
     text-align: end;
     min-width: 5rem;
+    flex-shrink: 0;
 }
 
 /* метки */
@@ -239,8 +243,9 @@ details:not([open])::details-content {
 }
 
 .card-marks {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, calc(var(--tag-padding-hor) + 0.5rem) 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, var(--notch) 50%);
     padding: var(--tag-padding-ver) var(--tag-padding-hor);
+    padding-left: calc(var(--notch) + var(--tag-padding-hor) + 0.5rem);
     width: var(--marks-width);
     font-size: var(--small-text);
     color: var(--secondary-text-color);
@@ -399,6 +404,7 @@ details:not([open])::details-content {
 .card-activity>.avatar {
     transition: transform 0.3s;
 }
+
 .card-activity:hover>.avatar {
     transform: scale(1.08);
 }
@@ -416,6 +422,7 @@ details:not([open])::details-content {
     transition: clip-path 0.3s;
     padding: 1rem;
 }
+
 .card-first-activity:hover {
     clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
 }
@@ -510,7 +517,7 @@ details:not([open])::details-content {
     }
 
     .card-first-activity {
-    transition: none;
-}
+        transition: none;
+    }
 
 }
